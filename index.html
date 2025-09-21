@@ -52,9 +52,23 @@
     .close{position:absolute;right:18px;top:14px;border:1px solid rgba(214,181,116,.5);border-radius:10px;background:transparent;color:var(--text);padding:6px 10px;cursor:pointer}
 
     /* Age Gate */
-    .age{position:fixed;inset:0;background:rgba(0,0,0,.85);display:grid;place-items:center}
-    .age .panel{max-width:520px;background:var(--bg-soft);border:1px solid rgba(214,181,116,.25);border-radius:16px;padding:26px;text-align:center;box-shadow:var(--shadow)}
-    .age h2{margin:0 0 10px}
+    .age{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:grid;
+  place-items:center;
+  z-index: 9999;           /* <- neu: über allem */
+}
+.age .panel{
+  max-width:520px;
+  background:var(--bg-soft);
+  border:1px solid rgba(214,181,116,.25);
+  border-radius:16px;
+  padding:26px;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
 
     /* Responsive */
     @media (max-width:980px){.grid{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr}.dialog .body{grid-template-columns:1fr}}
