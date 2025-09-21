@@ -153,28 +153,27 @@
 <script>
   const y = document.getElementById('y'); y.textContent = new Date().getFullYear();
 
-  // Demo-Daten – hier fügst du deine Sorten ein.
+  <script>
   const STRAINS = [
     {
-      name: 'Apricot Oreoz', thc: '22 %', cbd: '<0,5 %', type: 'Indica-leaning Hybrid',
-      terps: ['Myrcen','Caryophyllen','Limonen'],
-      flavors: ['Aprikose','Keks','Vanille'],
+      name: 'Apricot Oreoz',
+      breeder: 'Anesia Seeds',
+      thc: '27 %',
+      cbd: '3 %',
+      type: 'Hybrid',
+      flavors: ['Fruchtig'],
       images: ['img/apricot-oreoz-1.webp'],
-      desc: 'Cremig‑fruchtiges Profil mit dichter Harzschicht. Ruhig, fokussiert, abendgeeignet.'
+      desc: 'Fruchtiger Hybrid mit hoher Potenz und ausgewogenem Profil.'
     },
     {
-      name: 'London Pound Cake', thc: '24 %', cbd: '<0,5 %', type: 'Hybrid',
-      terps: ['Limonen','Linalool','Caryophyllen'],
-      flavors: ['Zitrus','Kuchen','Beeren'],
-      images: ['img/london-pound-cake-1.webp'],
-      desc: 'Sahnig‑zitronig, entspannend ohne Couch‑Lock. Für kreative Sessions.'
-    },
-    {
-      name: 'Gushers', thc: '23 %', cbd: '<0,5 %', type: 'Hybrid',
-      terps: ['Limonen','Humulen','Myrcen'],
-      flavors: ['Tropical','Süß','Diesel‑Hauch'],
-      images: ['img/gushers-1.webp'],
-      desc: 'Fruchtig und weich, ausgewogenes Körper‑/Kopfgefühl.'
+      name: 'Ayahuasca Purple',
+      breeder: 'Barneys Farm',
+      thc: '22 %',
+      cbd: '2 %',
+      type: 'Indica dominant',
+      flavors: ['Mango','Nussig','Tropisch'],
+      images: ['img/ayahuasca-purple-1.webp'],
+      desc: 'Aromatische Indica mit exotischem Geschmack und entspannender Wirkung.'
     }
   ];
 
@@ -194,7 +193,10 @@
       const img = h('img', {src:s.images[0], alt:s.name});
       const meta = h('div', {class:'meta'});
       meta.appendChild(h('h3', {}, s.name));
-      meta.appendChild(h('div', {}, h('span',{class:'tag'}, s.thc), h('span',{class:'tag'}, s.type)));
+      meta.appendChild(h('div', {}, 
+        h('span',{class:'tag'}, s.thc),
+        h('span',{class:'tag'}, s.type)
+      ));
       const btn = h('a', {href:'#', class:'link', 'data-i':idx}, 'Details ansehen');
       btn.addEventListener('click', e=>{ e.preventDefault(); openModal(idx); });
       meta.appendChild(h('div', {class:'actions'}, btn));
@@ -209,7 +211,7 @@
     document.getElementById('mTHC').textContent = s.thc;
     document.getElementById('mCBD').textContent = s.cbd;
     document.getElementById('mType').textContent = s.type;
-    document.getElementById('mTerps').textContent = s.terps.join(', ');
+    document.getElementById('mTerps').textContent = s.breeder;
     document.getElementById('mFlavors').textContent = s.flavors.join(', ');
     document.getElementById('mDesc').textContent = s.desc;
     const gal = document.getElementById('mGallery');
@@ -226,5 +228,3 @@
 
   renderGrid();
 </script>
-</body>
-</html>
