@@ -4,41 +4,50 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cloud Cartel – Strains & Infos (Ohne Shop)</title>
-  <meta name="description" content="Cloud Cartel – Strain‑Showcase mit Bildern, Terpenprofilen und Basisinfos. Keine Cookies. Kein Tracking. Kein Shop.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'none';">
+  <meta name="description" content="Cloud Cartel – Strain-Showcase mit Bildern, Breeder, Geschmacksprofilen & Basiswerten. Keine Cookies. Kein Tracking. Kein Shop.">
+  <!-- CSP: keine externen Skripte/Fonts -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'none';">
   <meta name="robots" content="index,follow" />
   <style>
     :root{
-      --bg:#0b0b0d; --bg-soft:#121217; --gold:#d6b574; --gold-2:#b9974f; --text:#e7e5df; --muted:#a7a39a;
+      --bg:#0b0b0d; --bg-soft:#121217; --gold:#d6b574; --text:#e7e5df; --muted:#a7a39a;
       --radius:14px; --shadow:0 6px 30px rgba(0,0,0,.35); --max:1200px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+      font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif}
     .wrap{max-width:var(--max);margin:auto;padding:20px}
+
+    /* Header */
     header{position:sticky;top:0;z-index:5;background:linear-gradient(180deg, rgba(11,11,13,.95), rgba(11,11,13,.7) 70%, rgba(11,11,13,0));backdrop-filter:saturate(1.2) blur(3px);}
     .nav{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid rgba(214,181,116,.2)}
     .brand{display:flex;align-items:center;gap:12px}
     .badge{width:42px;height:42px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;color:var(--gold);font-weight:700}
     .brand span{letter-spacing:.1em;text-transform:uppercase;font-weight:700}
     .btn{padding:10px 14px;border:1px solid var(--gold);color:var(--text);border-radius:10px;background:transparent;cursor:pointer}
+
+    /* Hero & Cards */
     .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:28px 20px}
     .card{background:var(--bg-soft);border:1px solid rgba(214,181,116,.18);border-radius:var(--radius);box-shadow:var(--shadow)}
     .hero .card{padding:28px}
     h1{margin:0 0 6px;font-size:42px;line-height:1.15;letter-spacing:.02em}
     .sub{color:var(--muted)}
     .pill{display:inline-flex;gap:10px;align-items:center;border:1px solid var(--gold);border-radius:999px;padding:8px 12px;color:var(--gold);font-weight:600}
+
+    /* Grid */
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .item{overflow:hidden}
-    .item img{width:100%;height:170px;object-fit:cover;display:block;filter:saturate(1.05);}
+    .item img{width:100%;height:170px;object-fit:cover;display:block;filter:saturate(1.05)}
     .item .meta{padding:14px 14px 16px}
     .item h3{margin:4px 0 6px;font-size:18px}
     .tag{display:inline-block;border:1px solid rgba(214,181,116,.35);color:var(--gold);padding:2px 8px;border-radius:999px;font-size:12px;margin-right:6px}
     .actions{display:flex;gap:10px;margin-top:10px}
     .link{border:1px solid rgba(214,181,116,.5);padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none}
+
     footer{margin:40px 0 30px;color:var(--muted);text-align:center}
 
     /* Modal */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:9998}
     .dialog{max-width:860px;width:100%;background:var(--bg-soft);border:1px solid rgba(214,181,116,.25);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.55);overflow:hidden}
     .dialog header{position:unset;background:none;border-bottom:1px solid rgba(214,181,116,.15)}
     .dialog .body{display:grid;grid-template-columns:1fr 1fr}
@@ -51,53 +60,35 @@
     .v{flex:1}
     .close{position:absolute;right:18px;top:14px;border:1px solid rgba(214,181,116,.5);border-radius:10px;background:transparent;color:var(--text);padding:6px 10px;cursor:pointer}
 
-    /* Age Gate */
- /* Age Gate – ganz nach vorn */
-.age{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.85);
-  display:grid;
-  place-items:center;
-  z-index:2147483647; /* MAX */
-}
-.age .panel{
-  max-width:520px;
-  background:var(--bg-soft);
-  border:1px solid rgba(214,181,116,.25);
-  border-radius:16px;
-  padding:26px;
-  text-align:center;
-  box-shadow:var(--shadow);
-}
-
-/* Solange Age-Gate sichtbar ist: Seite nicht klickbar */
-.age-open header,
-.age-open main,
-.age-open footer{
-  pointer-events:none;
-  filter: blur(1px);
-}
-
+    /* Age Gate – über ALLEM + Seite sperren */
+    .age{position:fixed;inset:0;background:rgba(0,0,0,.85);display:grid;place-items:center;z-index:2147483647}
+    .age .panel{max-width:520px;background:var(--bg-soft);border:1px solid rgba(214,181,116,.25);border-radius:16px;padding:26px;text-align:center;box-shadow:var(--shadow)}
+    .age-open header, .age-open main, .age-open footer{pointer-events:none;filter:blur(1px)}
 
     /* Responsive */
-    @media (max-width:980px){.grid{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr}.dialog .body{grid-template-columns:1fr}}
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr 1fr}
+      .hero{grid-template-columns:1fr}
+      .dialog .body{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
-  <!-- Age Gate (kein echter Schutz, nur Hinweis) -->
+
+  <!-- Age Gate -->
   <div id="ageGate" class="age" role="dialog" aria-modal="true">
     <div class="panel">
       <h2>Altersbestätigung</h2>
       <p class="sub">Diese Seite zeigt Inhalte zu Cannabis. Bitte bestätige, dass du volljährig bist.</p>
       <div style="display:flex;gap:10px;justify-content:center;margin-top:14px">
-      <button class="btn" id="btnEnter">Ich bin 21+</button>
-<button class="btn" id="btnExit">Nein</button>
+        <button class="btn" id="btnEnter">Ich bin 21+</button>
+        <button class="btn" id="btnExit">Nein</button>
       </div>
       <p style="margin-top:10px;color:var(--muted);font-size:13px">Hinweis: Es werden keine Cookies gesetzt. Kein Tracking.</p>
     </div>
   </div>
 
+  <!-- Header -->
   <header>
     <div class="nav wrap">
       <div class="brand">
@@ -111,17 +102,18 @@
     </div>
   </header>
 
+  <!-- Main -->
   <main class="wrap">
     <section class="hero">
       <div class="card">
-        <div class="pill">Top‑Shelf • Boutique • Clean</div>
-        <h1>Cloud Cartel – Strain‑Showcase</h1>
-        <p class="sub">Bilder, Terpenprofile, Noten & Basiswerte – ohne Shop, ohne Cookies, ohne Tracking.</p>
+        <div class="pill">Top-Shelf • Boutique • Clean</div>
+        <h1>Cloud Cartel – Strain-Showcase</h1>
+        <p class="sub">Bilder, Breeder, Geschmacksnoten & Basiswerte – ohne Shop, ohne Cookies, ohne Tracking.</p>
       </div>
       <div class="card" style="display:grid;place-items:center;min-height:180px;border-style:dashed">
         <div style="text-align:center">
           <div style="font-weight:700;color:var(--gold);letter-spacing:.1em;margin-bottom:6px">SIEGEL</div>
-          <div style="font-size:13px;color:var(--muted)">Hier kannst du später dein rundes 7‑cm Logo als PNG/SVG einbinden.</div>
+          <div style="font-size:13px;color:var(--muted)">Hier später dein rundes 7-cm Logo als PNG/SVG einbinden.</div>
         </div>
       </div>
     </section>
@@ -136,9 +128,9 @@
         <h3 style="margin:0 0 6px">Hinweise & Datenschutz</h3>
         <ul style="margin:6px 0 0;color:var(--muted)">
           <li>Keine Cookies. Kein externes Tracking.</li>
-          <li>Bilder sind lokal eingebunden (keine externen CDNs).</li>
-          <li>Diese Seite bietet keine Bestellfunktion / keinen Shop.</li>
-          <li>Inhalte dienen ausschließlich der Information. Außerhalb der Reichweite von Kindern aufbewahren. Nicht für unter 21‑Jährige geeignet.</li>
+          <li>Bilder werden lokal ausgeliefert (keine externen CDNs).</li>
+          <li>Kein Verkauf/Shop auf dieser Seite.</li>
+          <li>Inhalte dienen ausschließlich der Information. Außerhalb der Reichweite von Kindern aufbewahren. Nicht für unter 21-Jährige geeignet.</li>
         </ul>
       </div>
     </section>
@@ -151,7 +143,7 @@
     </div>
   </footer>
 
-  <!-- Modal für Strain-Details -->
+  <!-- Modal -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="dialog">
       <button class="close" onclick="closeModal()">Schließen</button>
@@ -165,8 +157,8 @@
             <li><div class="k">THC</div><div class="v" id="mTHC"></div></li>
             <li><div class="k">CBD</div><div class="v" id="mCBD"></div></li>
             <li><div class="k">Typ</div><div class="v" id="mType"></div></li>
-            <li><div class="k">Terpene</div><div class="v" id="mTerps"></div></li>
-            <li><div class="k">Aromen</div><div class="v" id="mFlavors"></div></li>
+            <li><div class="k">Breeder</div><div class="v" id="mBreeder"></div></li>
+            <li><div class="k">Geschmack</div><div class="v" id="mFlavors"></div></li>
             <li><div class="k">Beschreibung</div><div class="v" id="mDesc"></div></li>
           </ul>
         </div>
@@ -175,9 +167,22 @@
   </div>
 
 <script>
-  const y = document.getElementById('y'); y.textContent = new Date().getFullYear();
+  // Jahr im Footer
+  document.getElementById('y').textContent = new Date().getFullYear();
 
-  <script>
+  // Seite beim Laden sperren (Age-Gate aktiv)
+  document.body.classList.add('age-open');
+
+  // Age-Gate: Buttons anbinden
+  function enterSite(){
+    const gate = document.getElementById('ageGate');
+    if (gate) gate.style.display = 'none';
+    document.body.classList.remove('age-open');
+  }
+  document.getElementById('btnEnter')?.addEventListener('click', enterSite);
+  document.getElementById('btnExit')?.addEventListener('click', () => location.href = 'https://www.google.com');
+
+  // Deine Strains (Bilder sind Platzhalter in /img/)
   const STRAINS = [
     {
       name: 'Apricot Oreoz',
@@ -187,7 +192,7 @@
       type: 'Hybrid',
       flavors: ['Fruchtig'],
       images: ['img/apricot-oreoz-1.webp'],
-      desc: 'Fruchtiger Hybrid mit hoher Potenz und ausgewogenem Profil.'
+      desc: 'Fruchtiger Hybrid mit hoher Potenz und klarer Kopf-Note. Ausgewogen für entspannte Abende.'
     },
     {
       name: 'Ayahuasca Purple',
@@ -197,38 +202,29 @@
       type: 'Indica dominant',
       flavors: ['Mango','Nussig','Tropisch'],
       images: ['img/ayahuasca-purple-1.webp'],
-      desc: 'Aromatische Indica mit exotischem Geschmack und entspannender Wirkung.'
+      desc: 'Aromatische Indica mit exotischem Geschmacksprofil und tiefer Entspannung.'
     }
   ];
 
+  // Mini-Helper
   function h(tag, props={}, ...children){
     const el = document.createElement(tag);
     Object.entries(props).forEach(([k,v])=>{
-      if(k==='class') el.className=v; else if(k==='html') el.innerHTML=v; else el.setAttribute(k,v);
+      if(k==='class') el.className=v;
+      else if(k==='html') el.innerHTML=v;
+      else el.setAttribute(k,v);
     });
     children.flat().forEach(c=> el.appendChild(typeof c==='string'? document.createTextNode(c): c));
     return el;
   }
-// Seite beim Laden sperren
-document.body.classList.add('age-open');
 
-// Robustere Event-Handler
-function enterSite(){
-  const gate = document.getElementById('ageGate');
-  if (gate) gate.style.display = 'none';
-  document.body.classList.remove('age-open');
-}
-
-document.getElementById('btnEnter')?.addEventListener('click', enterSite);
-document.getElementById('btnExit')?.addEventListener('click', () => {
-  location.href = 'https://www.google.com';
-});
-
+  // Grid rendern
   function renderGrid(){
     const grid = document.getElementById('grid');
     STRAINS.forEach((s,idx)=>{
       const card = h('article', {class:'card item'});
-      const img = h('img', {src:s.images[0], alt:s.name});
+      const imgSrc = s.images?.[0] || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="%23121217"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="42" fill="%23d6b574">Bild fehlt</text></svg>';
+      const img = h('img', {src: imgSrc, alt: s.name});
       const meta = h('div', {class:'meta'});
       meta.appendChild(h('h3', {}, s.name));
       meta.appendChild(h('div', {}, 
@@ -243,18 +239,21 @@ document.getElementById('btnExit')?.addEventListener('click', () => {
     });
   }
 
+  // Modal öffnen
   function openModal(i){
     const s = STRAINS[i];
     document.getElementById('mTitle').textContent = s.name;
-    document.getElementById('mTHC').textContent = s.thc;
-    document.getElementById('mCBD').textContent = s.cbd;
-    document.getElementById('mType').textContent = s.type;
-    document.getElementById('mTerps').textContent = s.breeder;
-    document.getElementById('mFlavors').textContent = s.flavors.join(', ');
-    document.getElementById('mDesc').textContent = s.desc;
+    document.getElementById('mTHC').textContent = s.thc || '–';
+    document.getElementById('mCBD').textContent = s.cbd || '–';
+    document.getElementById('mType').textContent = s.type || '–';
+    document.getElementById('mBreeder').textContent = s.breeder || '–';
+    document.getElementById('mFlavors').textContent = (s.flavors||[]).join(', ') || '–';
+    document.getElementById('mDesc').textContent = s.desc || '';
+
     const gal = document.getElementById('mGallery');
     gal.innerHTML='';
-    s.images.forEach(src=> gal.appendChild(h('img',{src,alt:s.name})));
+    (s.images||[]).forEach(src=> gal.appendChild(h('img',{src,alt:s.name})));
+
     const m = document.getElementById('modal');
     m.style.display='flex'; m.setAttribute('aria-hidden','false');
   }
@@ -262,8 +261,8 @@ document.getElementById('btnExit')?.addEventListener('click', () => {
     const m = document.getElementById('modal');
     m.style.display='none'; m.setAttribute('aria-hidden','true');
   }
-  function enterSite(){ document.getElementById('ageGate').style.display='none'; }
 
+  // Seite aufbauen
   renderGrid();
 </script>
 </body>
